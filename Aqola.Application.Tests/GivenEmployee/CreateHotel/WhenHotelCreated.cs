@@ -21,12 +21,6 @@ namespace Aqola.Application.Tests.GivenEmployee.CreateHotel
         }
 
         [Fact]
-        public void ThenAvailableRoomsShouldEqualsRoomCreated()
-        {
-
-        }
-
-        [Fact]
         public void ThenKeycardShouldBeCreated()
         {
 
