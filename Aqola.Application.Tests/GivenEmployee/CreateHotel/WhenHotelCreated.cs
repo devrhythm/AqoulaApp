@@ -30,7 +30,7 @@ namespace Aqola.Application.Tests.GivenEmployee.CreateHotel
         [Fact]
         public void ThenKeycardShouldBeCreated()
         {
-
+            Assert.NotEmpty(_currentHotel.Keycards);
         }
 
         [Fact]

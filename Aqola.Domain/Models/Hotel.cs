@@ -7,6 +7,7 @@
 
         public List<Floor> Floors { get; private set; } = new List<Floor>();
         public int TotalRoom { get; private set; } = 0;
+        public List<Keycard> Keycards { get; private set; } = new List<Keycard>();
 
         public Hotel()
         {
@@ -29,6 +30,7 @@
                 Floors.Add(floor);
             }
             TotalRoom = _amountOfFloor * _amountOfRoomPerFloor;
+            Keycards = Keycard.CreateKeycards(TotalRoom);
         }
 
         public List<Room> GetAllRooms()
