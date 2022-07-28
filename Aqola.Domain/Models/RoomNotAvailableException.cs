@@ -8,8 +8,8 @@ namespace Aqola.Domain.Models
 {
     public class RoomNotAvailableException : Exception
     {
-        public RoomNotAvailableException(string guestName, Room room)
-            : base($"Cannot book room {room.RoomName} for {guestName}, The room is currently booked by {room.GuestName}")
+        public RoomNotAvailableException(string roomName,string newGuestName, string nameOfGuestWhoBookedRoom)
+            : base($"Cannot book room {roomName} for {newGuestName}, The room is currently booked by {nameOfGuestWhoBookedRoom}.")
         {
 
         }

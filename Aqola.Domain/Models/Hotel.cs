@@ -62,19 +62,18 @@
             return keycard.Register(roomName);
         }
 
-        public List<string> GetGuestNameList()
+        public List<Guest> GetGuestList()
         {
             List<Room> rooms = GetAllRooms();
             return rooms.Where(room => !room.IsAvailable)
-                .Select(room => room.GuestName)
+                .Select(room => room.Guest)
                 .ToList();
         }
 
         public Room GetGuestRoom(string guestName)
         {
             List<Room> rooms = GetAllRooms();
-            return rooms.Single(room => room.GuestName == guestName);
+            return rooms.Single(room => room.Guest.Name == guestName);
         }
-
     }
 }

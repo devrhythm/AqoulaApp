@@ -8,11 +8,13 @@ namespace Aqola.Domain.Models
 {
     public class GuestCheckedInResult : ResultBase
     {
-        public Guest GuestAlreadyCheckedIn { get; set; }
+        public Guest GuestWhoCheckedIn { get; set; }
+        public Room BookedRoom { get; set; }
 
-        public GuestCheckedInResult(string message, Guest guestAlreadCheckedIn) : base(message)
+        public GuestCheckedInResult(string message, Room bookedRoom) : base(message)
         {
-            GuestAlreadyCheckedIn = guestAlreadCheckedIn;
+            BookedRoom = bookedRoom;
+            GuestWhoCheckedIn = bookedRoom.Guest;
         }
     }
 }

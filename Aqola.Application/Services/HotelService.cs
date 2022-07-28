@@ -13,17 +13,17 @@ namespace Aqola.Application.Services
             Room bookedRoom = _currentHotel.GetRoom(roomName);
             try
             {
-                bookedRoom.CheckIn(guestName);
+                bookedRoom.CheckIn(guest);
                 Keycard keycard = _currentHotel.RegisterKeycard(roomName);
                 guest.TakeRoomKeycard(bookedRoom.RoomName, keycard.KeycardNo);
                 bookedRoom.GrantAccessByKeycard(keycard.KeycardNo);
 
                 var message = $"Room {roomName} is booked by {guestName} with keycard number {keycard.KeycardNo}.";
-                return new GuestCheckedInResult(message, guest);
+                return new GuestCheckedInResult(message, bookedRoom);
             }
             catch (Exception ex)
             {
-                return new GuestCheckedInResult(ex.Message, guest);
+                return new GuestCheckedInResult(ex.Message, bookedRoom);
             }
         }
 

@@ -10,8 +10,14 @@ namespace Aqola.Domain.Models
     {
         public string Name { get; private set; } = "";
         public int Age { get; private set; } = 0;
-        public int KeycardNo { get; private set; }
+        public int KeycardNo { get; private set; } = Keycard.DefaultKeycardNo;
         public string BookedRoomNo { get; private set; } = "";
+
+        private Guest()
+        {
+
+        }
+
         public Guest(string name, int age)
         {
             Name = name;
@@ -22,6 +28,16 @@ namespace Aqola.Domain.Models
         {
             BookedRoomNo = bookedRoomNo;
             KeycardNo = keycard;
+        }
+
+        public static Guest DummyGuest()
+        {
+            return new Guest();
+        }
+
+        public bool HasKeyCard()
+        {
+            return KeycardNo != Keycard.DefaultKeycardNo;
         }
     }
 }

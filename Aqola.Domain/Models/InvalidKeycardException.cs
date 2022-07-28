@@ -9,7 +9,7 @@ namespace Aqola.Domain.Models
     public class InvalidKeycardException : Exception
     {
         public InvalidKeycardException(Room room)
-                : base($"Only {room.GuestName} can checkout with keycard number {room.KeycardNo}")
+                : base($"Only {room.Guest.Name} can checkout with keycard number {room.KeycardNo}")
         {
         }
     }

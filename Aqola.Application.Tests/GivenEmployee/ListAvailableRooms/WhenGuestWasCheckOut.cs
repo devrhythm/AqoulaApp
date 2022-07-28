@@ -19,7 +19,7 @@ namespace Aqola.Application.Tests.GivenEmployee.ListAvailableRooms
         {
             (string roomName, string guestName, int guestAge) = ("203", "Thor", 32);
             GuestCheckedInResult guestCheckedInResult = _hotelService.CheckIn(roomName, guestName, guestAge);
-            Guest guest = guestCheckedInResult.GuestAlreadyCheckedIn;
+            Guest guest = guestCheckedInResult.GuestWhoCheckedIn;
 
             int amountOfAvailableBeforeCheckOut = _currentHotel.GetAvailableRooms().Count;
 

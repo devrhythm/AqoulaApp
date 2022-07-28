@@ -8,6 +8,7 @@ namespace Aqola.Domain.Models
 {
     public class Keycard
     {
+        public const int DefaultKeycardNo = -1;
         public int KeycardNo { get; private set; }
         public string RoomNo { get; private set; } = "";
         public bool IsAvailable { get; private set; } = true;
