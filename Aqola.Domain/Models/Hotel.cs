@@ -78,6 +78,12 @@
                 .ToList();
         }
 
+        public Guest GetGuestInfoByRoom(string searchRoomName)
+        {
+            List<Guest> allGuest = GetGuestList();
+            return allGuest.Single(guest => guest.BookedRoomName == searchRoomName);
+        }
+
         public Room? GetGuestRoom(string guestName)
         {
             List<Room> rooms = GetAllRooms();

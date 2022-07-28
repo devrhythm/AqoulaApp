@@ -11,7 +11,7 @@ namespace Aqola.Domain.Models
         public string Name { get; private set; } = "";
         public int Age { get; private set; } = 0;
         public int KeycardNo { get; private set; } = Keycard.DefaultKeycardNo;
-        public string BookedRoomNo { get; private set; } = "";
+        public string BookedRoomName { get; private set; } = "";
 
         private Guest()
         {
@@ -24,9 +24,9 @@ namespace Aqola.Domain.Models
             Age = age;
         }
 
-        public void TakeRoomKeycard(string bookedRoomNo, int keycard)
+        public void TakeRoomKeycard(string bookedRoomName, int keycard)
         {
-            BookedRoomNo = bookedRoomNo;
+            BookedRoomName = bookedRoomName;
             KeycardNo = keycard;
         }
 
@@ -43,7 +43,19 @@ namespace Aqola.Domain.Models
         public void ReturnKeycard()
         {
             KeycardNo = Keycard.DefaultKeycardNo;
-            BookedRoomNo = "";
+            BookedRoomName = "";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            var compareGuest = (Guest)obj;
+            return Name == compareGuest.Name
+              && Age == compareGuest.Age;
         }
     }
 }

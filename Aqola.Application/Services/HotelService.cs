@@ -60,5 +60,10 @@ namespace Aqola.Application.Services
             var outputMessage = $"Hotel created with {amountFloor} floor(s), {amountRoomPerFloor} room(s) per floor.";
             return new HotelCreatedResult(outputMessage, _currentHotel);
         }
+
+        public Guest GetGuestInRoom(string searchRoomName)
+        {
+            return _currentHotel.GetGuestInfoByRoom(searchRoomName);
+        }
     }
 }
