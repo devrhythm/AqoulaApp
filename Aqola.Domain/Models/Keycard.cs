@@ -10,7 +10,7 @@ namespace Aqola.Domain.Models
     {
         public const int DefaultKeycardNo = -1;
         public int KeycardNo { get; private set; }
-        public string RoomNo { get; private set; } = "";
+        public string RoomName { get; private set; } = "";
         public bool IsAvailable { get; private set; } = true;
         public Keycard(int keycardNo)
         {
@@ -28,15 +28,15 @@ namespace Aqola.Domain.Models
 
         public Keycard Register(string roomNo)
         {
-            RoomNo = roomNo;
+            RoomName = roomNo;
             IsAvailable = false;
             return this;
         }
 
         public Keycard Unregister()
         {
-            RoomNo = "";
-            IsAvailable = false;
+            RoomName = "";
+            IsAvailable = true;
             return this;
         }
     }

@@ -43,6 +43,14 @@
             return allRooms;
         }
 
+        public Room? GetRoomByKeycard(int keycardNo)
+        {
+            List<Room> allRooms = GetAllRooms();
+            return allRooms
+                    .Where(room => room.KeycardNo == keycardNo)
+                    .SingleOrDefault();
+        }
+
         public List<Room> GetAvailableRooms()
         {
             List<Room> allRooms = GetAllRooms();
@@ -70,10 +78,15 @@
                 .ToList();
         }
 
-        public Room GetGuestRoom(string guestName)
+        public Room? GetGuestRoom(string guestName)
         {
             List<Room> rooms = GetAllRooms();
-            return rooms.Single(room => room.Guest.Name == guestName);
+            return rooms.SingleOrDefault(room => room.Guest.Name == guestName);
+        }
+
+        public Keycard GetKeycard(int keycardNo)
+        {
+            return Keycards.Single(keycard => keycard.KeycardNo == keycardNo);
         }
     }
 }

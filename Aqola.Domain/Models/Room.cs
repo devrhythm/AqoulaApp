@@ -8,12 +8,11 @@ namespace Aqola.Domain.Models
 {
     public class Room
     {
-        private const int DefaultKeycardNo = -1;
         public int RoomNo { get; private set; }
         public Floor Floor { get; private set; }
         public string RoomName { get; private set; }
         public Guest Guest { get; private set; } = Guest.DummyGuest();
-        public int KeycardNo { get; private set; } = DefaultKeycardNo;
+        public int KeycardNo { get; private set; } = Keycard.DefaultKeycardNo;
         public bool IsAvailable { get; private set; } = true;
 
         public Room(int roomNo, Floor floor)
@@ -37,12 +36,12 @@ namespace Aqola.Domain.Models
         {
             IsAvailable = true;
             Guest = Guest.DummyGuest();
-            KeycardNo = DefaultKeycardNo;
+            KeycardNo = Keycard.DefaultKeycardNo;
         }
 
-        public bool IsValidKeycard(int keycardNo)
+        public bool IsValidKeycard(int keycardNo, string guestName)
         {
-            return keycardNo == KeycardNo;
+            return KeycardNo == keycardNo && Guest.Name == guestName;
         }
 
         public void GrantAccessByKeycard(int keycardNo)

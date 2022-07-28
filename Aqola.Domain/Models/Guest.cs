@@ -39,5 +39,11 @@ namespace Aqola.Domain.Models
         {
             return KeycardNo != Keycard.DefaultKeycardNo;
         }
+
+        public void ReturnKeycard()
+        {
+            KeycardNo = Keycard.DefaultKeycardNo;
+            BookedRoomNo = "";
+        }
     }
 }

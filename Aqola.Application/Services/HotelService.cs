@@ -29,13 +29,28 @@ namespace Aqola.Application.Services
 
         public CheckedOutResult CheckOut(int keycardNo, string guestName)
         {
-            Room room = _currentHotel.GetGuestRoom(guestName);
-            if (room.IsValidKeycard(keycardNo))
+            try
             {
-                room.Checkout();
-                return new CheckedOutResult($"Room {room.RoomName} is checkout.");
+                Keycard keycard = _currentHotel.GetKeycard(keycardNo);
+                Room room = _currentHotel.GetRoom(keycard.RoomName);
+
+                if (room.IsValidKeycard(keycardNo, guestName))
+                {
+                    room.Guest.ReturnKeycard();
+                    keycard.Unregister();
+                    room.Checkout();
+
+                    return new CheckedOutResult($"Room {room.RoomName} is checkout.", keycard, room);
+                }
+                else
+                {
+                    return new CheckedOutResult($"Only {room.Guest.Name} can checkout with keycard number {keycardNo}.");
+                }
             }
-            throw new InvalidKeycardException(room);
+            catch (Exception)
+            {
+                return new CheckedOutResult("Invalid keycard number.");
+            }
         }
 
         public HotelCreatedResult CreateHotel(int amountFloor, int amountRoomPerFloor)
