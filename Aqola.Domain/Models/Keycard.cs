@@ -9,7 +9,7 @@ namespace Aqola.Domain.Models
     public class Keycard
     {
         public int KeycardNo { get; private set; }
-        public Room? BookedRoom { get; private set; }
+        public string RoomNo { get; private set; } = "";
         public bool IsAvailable { get; private set; } = true;
         public Keycard(int keycardNo)
         {
@@ -23,6 +23,20 @@ namespace Aqola.Domain.Models
                 keycards.Add(new Keycard(runningNo));
             }
             return keycards;
+        }
+
+        public Keycard Register(string roomNo)
+        {
+            RoomNo = roomNo;
+            IsAvailable = false;
+            return this;
+        }
+
+        public Keycard Unregister()
+        {
+            RoomNo = "";
+            IsAvailable = false;
+            return this;
         }
     }
 }

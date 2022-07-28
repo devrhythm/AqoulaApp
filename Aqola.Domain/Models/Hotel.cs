@@ -42,5 +42,39 @@
             });
             return allRooms;
         }
+
+        public List<Room> GetAvailableRooms()
+        {
+            List<Room> allRooms = GetAllRooms();
+            return allRooms.Where(room => room.IsAvailable).ToList();
+        }
+
+        public Room GetRoom(string roomName)
+        {
+            List<Room> rooms = GetAllRooms();
+            return rooms.Single(room => room.RoomName == roomName);
+        }
+
+        public Keycard RegisterKeycard(string roomName)
+        {
+            Keycard keycard = Keycards.OrderBy(keycard => keycard.KeycardNo)
+                     .First(keycard => keycard.IsAvailable);
+            return keycard.Register(roomName);
+        }
+
+        public List<string> GetGuestNameList()
+        {
+            List<Room> rooms = GetAllRooms();
+            return rooms.Where(room => !room.IsAvailable)
+                .Select(room => room.GuestName)
+                .ToList();
+        }
+
+        public Room GetGuestRoom(string guestName)
+        {
+            List<Room> rooms = GetAllRooms();
+            return rooms.Single(room => room.GuestName == guestName);
+        }
+
     }
 }
