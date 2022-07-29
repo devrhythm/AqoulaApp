@@ -12,8 +12,7 @@ namespace Aqola.Application.Services.Commands
 
         public string Execute(params object?[] options)
         {
-            List<Room> rooms = _hotelService.GetAvailableRooms();
-            string result = string.Join(", ", rooms.Select(r => r.RoomName).AsEnumerable());
+            string result = _hotelService.GetAvailableRoomNames();
             return result;
         }
 

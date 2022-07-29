@@ -151,5 +151,10 @@ namespace Aqola.Application.Services
 
             throw new NotImplementedException();
         }
+
+        public string GetAvailableRoomNames()
+        {
+            return string.Join(", ", GetAvailableRooms().Select(r => r.RoomName).AsEnumerable());
+        }
     }
 }
