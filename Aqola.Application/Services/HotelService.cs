@@ -100,11 +100,10 @@ namespace Aqola.Application.Services
             return string.Join(", ", guestListByFloor);
         }
 
-
         public string BookByFloor(int floorNo, string guestName, int guestAge)
         {
             Guest guest = new(guestName, guestAge);
-            Floor floor = _currentHotel.Floors.Single(floor => floor.FloorNo == floorNo);
+            Floor floor = _currentHotel.GetFloor(floorNo);
             if (floor.IsEmptyGuest())
             {
                 floor.Rooms.ForEach(bookedRoom =>
@@ -127,5 +126,29 @@ namespace Aqola.Application.Services
             }
 
         }
+
+        public string CheckoutByFloor(int floorNo)
+        {
+            Floor floor = _currentHotel.GetFloor(floorNo);
+            floor.Rooms.ForEach(room =>
+            {
+                if (room.IsValidKeycard(room.KeycardNo, room.Guest.Name))
+                {
+                    room.Guest.ReturnKeycard();
+                    Keycard keycard = _currentHotel.GetKeycard(room.KeycardNo);
+                    keycard.Unregister();
+                    room.Checkout();
+                }
+            });
+
+            if (floor.Rooms.TrueForAll(room => room.IsAvailable))
+            {
+                return $"Room {floor.Rooms.JoinCommaWithSpace()} are checkout.";
+            }
+
+            throw new NotImplementedException();
+        }
+
+
     }
 }

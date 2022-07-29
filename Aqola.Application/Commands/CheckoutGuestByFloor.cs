@@ -10,7 +10,13 @@ namespace Aqola.Application.Services.Commands
         }
         public string Execute(params object[] options)
         {
-            throw new NotImplementedException();
+            if (options is null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            int floorNo = options[0].ToInt();
+            return _hotelService.CheckoutByFloor(floorNo);
         }
 
         public bool IsHandle(string command)

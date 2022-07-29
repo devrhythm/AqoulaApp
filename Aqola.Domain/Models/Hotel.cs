@@ -95,5 +95,10 @@
         {
             return Keycards.Single(keycard => keycard.KeycardNo == keycardNo);
         }
+
+        public Floor GetFloor(int floorNo)
+        {
+            return Floors.Single(floor => floor.FloorNo == floorNo);
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace Aqola.Domain.Services
         string GetGuestNamesByFloor(int floor);
         List<Room> GetAvailableRooms();
         string GetGuestByAge(object filterAgeStart, object filterAgeEnd);
+        string CheckoutByFloor(int floorNo);
+
     }
 }
