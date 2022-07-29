@@ -16,7 +16,7 @@ namespace Aqola.Application.Services.Commands
 
         public bool IsHandle(string command)
         {
-            return command.StartsWith("list_guest");
+            return command.Equals("list_guest");
         }
     }
 }

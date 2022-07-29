@@ -23,15 +23,10 @@ namespace Aqola.Application
             List<ICommand> listOfHotelCommand = HotelCommandFactory.Create(_hotelService);
             foreach (string inputCommand in inputCommandList)
             {
-                foreach (ICommand hotelCommand in listOfHotelCommand)
-                {
-                    if (hotelCommand.IsHandle(inputCommand))
-                    {
-                        object[] commandOptions = inputCommand.GetOptions();
-                        string commandResult = hotelCommand.Execute(commandOptions);
-                        triggerFunction(commandResult);
-                    }
-                }
+                ICommand hotelCommand = listOfHotelCommand.Where(cmd => cmd.IsHandle(inputCommand)).Single();
+                object[] commandOptions = inputCommand.GetOptions();
+                string commandResult = hotelCommand.Execute(commandOptions);
+                triggerFunction(commandResult);
             }
         }
 

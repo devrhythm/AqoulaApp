@@ -20,7 +20,7 @@ namespace Aqola.Application.Services.Commands
 
         public bool IsHandle(string command)
         {
-            return command.StartsWith("book");
+            return command.StartsWith("book ");
         }
     }
 }
