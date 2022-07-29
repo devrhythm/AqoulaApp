@@ -29,5 +29,14 @@ namespace Aqola.Application
             }
             return 0;
         }
+
+        public static string ToStringOrEmpty(this object? input)
+        {
+            if (input == null)
+            {
+                return string.Empty;
+            }
+            return (string)input ?? string.Empty;
+        }
     }
 }
