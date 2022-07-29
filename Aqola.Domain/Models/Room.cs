@@ -14,6 +14,7 @@ namespace Aqola.Domain.Models
         public Guest Guest { get; private set; } = Guest.DummyGuest();
         public int KeycardNo { get; private set; } = Keycard.DefaultKeycardNo;
         public bool IsAvailable { get; private set; } = true;
+        public DateTime? CheckInDate { get; private set; }
 
         public Room(int roomNo, Floor floor)
         {
@@ -28,6 +29,7 @@ namespace Aqola.Domain.Models
             {
                 throw new RoomNotAvailableException(RoomName, newGuest.Name, Guest.Name);
             }
+            CheckInDate = DateTime.Now;
             IsAvailable = false;
             Guest = newGuest;
         }
@@ -37,6 +39,7 @@ namespace Aqola.Domain.Models
             IsAvailable = true;
             Guest = Guest.DummyGuest();
             KeycardNo = Keycard.DefaultKeycardNo;
+            CheckInDate = null;
         }
 
         public bool IsValidKeycard(int keycardNo, string guestName)

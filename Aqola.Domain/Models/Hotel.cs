@@ -74,6 +74,7 @@
         {
             List<Room> rooms = GetAllRooms();
             return rooms.Where(room => !room.IsAvailable)
+                .OrderBy(room => room.CheckInDate)
                 .Select(room => room.Guest)
                 .ToList();
         }

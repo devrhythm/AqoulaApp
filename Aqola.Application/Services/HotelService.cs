@@ -65,5 +65,12 @@ namespace Aqola.Application.Services
         {
             return _currentHotel.GetGuestInfoByRoom(searchRoomName);
         }
+
+        public string ListGuestNames()
+        {
+            List<Guest> guestList = _currentHotel.GetGuestList();
+            IEnumerable<string> listGuestNames = guestList.Select(g => g.Name).Distinct().AsEnumerable();
+            return string.Join(", ", listGuestNames);
+        }
     }
 }

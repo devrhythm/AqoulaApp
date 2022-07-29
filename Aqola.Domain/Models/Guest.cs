@@ -57,5 +57,12 @@ namespace Aqola.Domain.Models
             return Name == compareGuest.Name
               && Age == compareGuest.Age;
         }
+
+        public void Deconstruct(out string name, out int age)
+        {
+            name = Name;
+            age = Age;
+
+        }
     }
 }
