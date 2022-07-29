@@ -9,6 +9,7 @@ namespace Aqola.Domain.Services
         CheckedOutResult CheckOut(int keycardNo, string guestName);
         Guest GetGuestByRoom(string searchRoomName);
         string ListGuestNames();
+        string GetGuestNamesByFloor(int floor);
         List<Room> GetAvailableRooms();
         string GetGuestByAge(object filterAgeStart, object filterAgeEnd);
     }

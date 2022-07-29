@@ -88,5 +88,16 @@ namespace Aqola.Application.Services
         {
             return _currentHotel.GetAvailableRooms();
         }
+
+        public string GetGuestNamesByFloor(int floor)
+        {
+            List<Guest> guestList = _currentHotel.GetGuestList();
+            string floorString = floor.ToString();
+            IEnumerable<string> guestListByFloor = guestList
+                                                    .Where(guest => guest.BookedRoomName.StartsWith(floorString))
+                                                    .Select(guest => guest.Name)
+                                                    .AsEnumerable();
+            return string.Join(", ", guestListByFloor);
+        }
     }
 }
