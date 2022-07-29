@@ -10,6 +10,6 @@ namespace Aqola.Domain.Services
         Guest GetGuestByRoom(string searchRoomName);
         string ListGuestNames();
         List<Room> GetAvailableRooms();
-        string GetGuestByAge(object ageStart, object ageEnd);
+        string GetGuestByAge(object filterAgeStart, object filterAgeEnd);
     }
 }
