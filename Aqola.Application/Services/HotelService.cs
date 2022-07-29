@@ -99,5 +99,33 @@ namespace Aqola.Application.Services
                                                     .AsEnumerable();
             return string.Join(", ", guestListByFloor);
         }
+
+
+        public string BookByFloor(int floorNo, string guestName, int guestAge)
+        {
+            Guest guest = new(guestName, guestAge);
+            Floor floor = _currentHotel.Floors.Single(floor => floor.FloorNo == floorNo);
+            if (floor.IsEmptyGuest())
+            {
+                floor.Rooms.ForEach(bookedRoom =>
+                {
+                    bookedRoom.CheckIn(guest);
+                    Keycard keycard = _currentHotel.RegisterKeycard(bookedRoom.RoomName);
+                    guest.TakeRoomKeycard(bookedRoom.RoomName, keycard.KeycardNo);
+                    bookedRoom.GrantAccessByKeycard(keycard.KeycardNo);
+                });
+                IEnumerable<string> roomNameList = floor.Rooms.Select(room => room.RoomName).AsEnumerable();
+                string roomNames = roomNameList.JoinCommaWithSpace();
+                IEnumerable<int> keycardNoList = floor.Rooms.Select(room => room.KeycardNo).AsEnumerable();
+                string bookedKeycardNumbers = keycardNoList.JoinCommaWithSpace();
+                string message = $"Room {roomNames} are booked by {guestName} with keycard number {bookedKeycardNumbers}.";
+                return message;
+            }
+            else
+            {
+                return $"Cannot book floor {floorNo} for {guestName}.";
+            }
+
+        }
     }
 }

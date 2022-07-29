@@ -24,5 +24,10 @@ namespace Aqola.Application
                     throw new NotImplementedException();
             }
         }
+
+        internal static string JoinCommaWithSpace<T>(this IEnumerable<T> enumberable)
+        {
+            return string.Join(", ", enumberable);
+        }
     }
 }

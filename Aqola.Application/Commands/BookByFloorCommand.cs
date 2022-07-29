@@ -10,7 +10,10 @@ namespace Aqola.Application.Services.Commands
         }
         public string Execute(params object?[] options)
         {
-            throw new NotImplementedException();
+            int floor = options[0].ToInt();
+            string guestName = options[1].ToStringOrEmpty();
+            int guestAge = options[2].ToInt();
+            return _hotelService.BookByFloor(floor, guestName, guestAge);
         }
 
         public bool IsHandle(string command)

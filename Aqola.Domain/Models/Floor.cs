@@ -22,5 +22,10 @@
             }
             return Rooms;
         }
+
+        public bool IsEmptyGuest()
+        {
+            return Rooms.TrueForAll(room => room.IsAvailable);
+        }
     }
 }
