@@ -27,5 +27,15 @@
         {
             return Rooms.TrueForAll(room => room.IsAvailable);
         }
+
+        public bool IsAvailable()
+        {
+            return Rooms.TrueForAll(room => room.IsAvailable);
+        }
+
+        public List<Room> GetGuestRooms()
+        {
+            return Rooms.Where(room => !room.IsAvailable).ToList();
+        }
     }
 }

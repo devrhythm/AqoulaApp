@@ -97,7 +97,7 @@ namespace Aqola.Application.Services
             IEnumerable<string> guestListByFloor = guestList
                                                     .Where(guest => guest.BookedRoomName.StartsWith(floorString))
                                                     .Select(guest => guest.Name)
-                                                    .AsEnumerable();
+                                                    .ToList();
             return string.Join(", ", guestListByFloor);
         }
 
@@ -107,13 +107,14 @@ namespace Aqola.Application.Services
             Floor floor = _currentHotel.GetFloor(floorNo);
             if (floor.IsEmptyGuest())
             {
-                floor.Rooms.ForEach(bookedRoom =>
+                foreach (Room bookedRoom in floor.Rooms)
                 {
                     bookedRoom.CheckIn(guest);
                     Keycard keycard = _currentHotel.RegisterKeycard(bookedRoom.RoomName);
                     guest.TakeRoomKeycard(bookedRoom.RoomName, keycard.KeycardNo);
                     bookedRoom.GrantAccessByKeycard(keycard.KeycardNo);
-                });
+                }
+
                 IEnumerable<string> roomNameList = floor.Rooms.Select(room => room.RoomName).AsEnumerable();
                 string roomNames = roomNameList.JoinCommaWithSpace();
                 IEnumerable<int> keycardNoList = floor.Rooms.Select(room => room.KeycardNo).AsEnumerable();
@@ -131,25 +132,24 @@ namespace Aqola.Application.Services
         public string CheckoutByFloor(int floorNo)
         {
             Floor floor = _currentHotel.GetFloor(floorNo);
-            floor.Rooms.ForEach(room =>
+            List<Room> guestRooms = floor.GetGuestRooms();
+            foreach (Room room in guestRooms)
             {
                 if (room.IsValidKeycard(room.KeycardNo, room.Guest.Name))
                 {
-                    room.Guest.ReturnKeycard();
                     Keycard keycard = _currentHotel.GetKeycard(room.KeycardNo);
-                    keycard.Unregister();
+                    room.Guest.ReturnKeycard();
                     room.Checkout();
+                    keycard.Unregister();
                 }
-            });
+            }
 
             if (floor.Rooms.TrueForAll(room => room.IsAvailable))
             {
-                return $"Room {floor.Rooms.JoinCommaWithSpace()} are checkout.";
+                return $"Room {guestRooms.Select(r => r.RoomName).JoinCommaWithSpace()} are checkout.";
             }
 
             throw new NotImplementedException();
         }
-
-
     }
 }
