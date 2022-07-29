@@ -4,22 +4,23 @@ namespace Aqola.Application
 {
     internal static class IEnumberableExtension
     {
-        internal static IEnumerable<Guest> FilterByOperand(this IEnumerable<Guest> guests, object filterStart, object filterEnd)
+        internal static IQueryable<Guest> FilterByOperand(this IEnumerable<Guest> guests, object filterStart, object filterEnd)
         {
             if (filterStart == null || filterEnd == null)
             {
-                return guests;
+                return guests.AsQueryable();
             }
 
             if (filterStart is int && filterEnd is int)
-                return guests.Where(g => g.Age >= (int)filterStart && g.Age <= (int)filterEnd).AsEnumerable();
+                return guests.Where(g => g.Age >= filterStart.ToInt() && g.Age <= filterEnd.ToInt()).AsQueryable();
+
 
             switch (filterStart.ToString())
             {
                 case ">":
-                    return guests.Where(g => g.Age > (int)filterEnd).AsEnumerable();
+                    return guests.Where(g => g.Age > filterEnd.ToInt()).AsQueryable();
                 case "<":
-                    return guests.Where(g => g.Age < (int)filterEnd).AsEnumerable();
+                    return guests.Where(g => g.Age < filterEnd.ToInt()).AsQueryable();
                 default:
                     throw new NotImplementedException();
             }

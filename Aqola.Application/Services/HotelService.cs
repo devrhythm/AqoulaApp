@@ -78,10 +78,11 @@ namespace Aqola.Application.Services
             List<Guest> guestList = _currentHotel.GetGuestList();
             IEnumerable<string> listGuestNames
                                     = guestList.FilterByOperand(filterAgeStart, filterAgeEnd)
+                                    .ToList()
                                     .Select(g => g.Name)
                                     .Distinct()
                                     .AsEnumerable();
-            return string.Join(", ", listGuestNames);
+            return listGuestNames.JoinCommaWithSpace();
         }
 
         public List<Room> GetAvailableRooms()
