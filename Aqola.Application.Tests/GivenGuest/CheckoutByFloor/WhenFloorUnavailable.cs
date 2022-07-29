@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aqola.Application.Tests.GivenEmployee.CheckoutByFloor
+namespace Aqola.Application.Tests.GivenGuest.CheckoutByFloor
 {
-    public class WhenFloorStillHasGuest : BaseHotelTestScenario
+    public class WhenFloorUnavailable : BaseHotelTestScenario
     {
-        public WhenFloorStillHasGuest()
+        public WhenFloorUnavailable()
         {
             _hotelService.CheckIn("101", "PeterParker", 16);
             _hotelService.CheckIn("102", "StephenStrange", 36);
