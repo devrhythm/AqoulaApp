@@ -1,4 +1,5 @@
-﻿using Aqola.Domain.Services;
+﻿using Aqola.Domain.Models;
+using Aqola.Domain.Services;
 
 namespace Aqola.Application.Services.Commands
 {
@@ -10,7 +11,11 @@ namespace Aqola.Application.Services.Commands
         }
         public string Execute(params object?[] options)
         {
-            throw new NotImplementedException();
+            int keycardNo = options[0].ToInt();
+            string guestName = options[1].ToStringOrEmpty();
+
+            CheckedOutResult result = _hotelService.CheckOut(keycardNo, guestName);
+            return result.Message;
         }
 
         public bool IsHandle(string command)
