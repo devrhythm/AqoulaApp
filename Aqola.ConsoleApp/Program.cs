@@ -3,7 +3,10 @@ using Aqola.Application;
 using Aqola.Application.Services;
 using Aqola.Domain.Services;
 
-Console.WriteLine("Welcome to Aqola Hotel App");
+Console.WriteLine(@"
+--------------------
+Welcome to Aqola Hotel App
+--------------------");
 IHotelService hotelService = new HotelService();
 HotellController controller = new(hotelService);
 Func<string, string> ShowResult = (result) =>
@@ -30,5 +33,5 @@ StackTrace : {ex.StackTrace}
 string readyToQuitMessage = $@"
 --------------------
 Please enter any key to close the app.";
-Console.WriteLine();
+Console.WriteLine(readyToQuitMessage);
 Console.ReadLine();
