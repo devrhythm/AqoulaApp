@@ -61,7 +61,7 @@ namespace Aqola.Application.Services
             return new HotelCreatedResult(outputMessage, _currentHotel);
         }
 
-        public Guest GetGuestInRoom(string searchRoomName)
+        public Guest GetGuestByRoom(string searchRoomName)
         {
             return _currentHotel.GetGuestInfoByRoom(searchRoomName);
         }

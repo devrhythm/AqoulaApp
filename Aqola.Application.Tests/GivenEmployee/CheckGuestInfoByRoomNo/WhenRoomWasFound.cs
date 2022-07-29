@@ -24,7 +24,7 @@ namespace Aqola.Application.Tests.GivenEmployee.CheckGuestInfoByRoomNo
         public void ThenGuestInfoShouldBeCorrect()
         {
             string searchRoomNo = "203";
-            Guest guest = _hotelService.GetGuestInRoom(searchRoomNo);
+            Guest guest = _hotelService.GetGuestByRoom(searchRoomNo);
             Guest guestWhoCheckedIn = _checkInResult.GuestWhoCheckedIn;
             Assert.True(guest.Equals(guestWhoCheckedIn));
         }

@@ -1,4 +1,5 @@
-﻿using Aqola.Domain.Services;
+﻿using Aqola.Domain.Models;
+using Aqola.Domain.Services;
 
 namespace Aqola.Application.Services.Commands
 {
@@ -10,7 +11,9 @@ namespace Aqola.Application.Services.Commands
         }
         public string Execute(params object?[] options)
         {
-            throw new NotImplementedException();
+            string roomName = options[0].ToStringOrEmpty();
+            Guest guest = _hotelService.GetGuestByRoom(roomName);
+            return guest.Name;
         }
 
         public bool IsHandle(string command)
