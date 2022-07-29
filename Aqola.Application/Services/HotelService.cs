@@ -119,7 +119,7 @@ namespace Aqola.Application.Services
                 string roomNames = roomNameList.JoinCommaWithSpace();
                 IEnumerable<int> keycardNoList = floor.Rooms.Select(room => room.KeycardNo).AsEnumerable();
                 string bookedKeycardNumbers = keycardNoList.JoinCommaWithSpace();
-                string message = $"Room {roomNames} are booked by {guestName} with keycard number {bookedKeycardNumbers}.";
+                string message = $"Room {roomNames} are booked with keycard number {bookedKeycardNumbers}";
                 return message;
             }
             else
