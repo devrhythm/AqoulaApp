@@ -5,20 +5,17 @@ namespace Aqola.Application.Services.Commands
 {
     internal class GetGuestInRoomCommand : BaseHotelCommand, ICommand
     {
+        public override string CommandName => "get_guest_in_room";
+
         public GetGuestInRoomCommand(IHotelService hotelService) : base(hotelService)
         {
 
         }
-        public string Execute(params object?[] options)
+        public override string Execute(params object?[] options)
         {
             string roomName = options[0].ToStringOrEmpty();
             Guest guest = _hotelService.GetGuestByRoom(roomName);
             return guest.Name;
-        }
-
-        public bool IsHandle(string command)
-        {
-            return command.StartsWith("get_guest_in_room");
         }
     }
 }

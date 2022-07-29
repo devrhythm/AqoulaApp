@@ -4,16 +4,16 @@ using Aqola.Domain.Services;
 
 namespace Aqola.Application
 {
-    public class HotellController
+    public class HotelController
     {
         private readonly IHotelService _hotelService = new HotelService();
 
-        internal HotellController()
+        internal HotelController()
         {
 
         }
 
-        public HotellController(IHotelService hotelService)
+        public HotelController(IHotelService hotelService)
         {
             _hotelService = hotelService;
         }
@@ -23,7 +23,7 @@ namespace Aqola.Application
             List<ICommand> listOfHotelCommand = HotelCommandFactory.Create(_hotelService);
             foreach (string inputCommand in inputCommandList)
             {
-                ICommand hotelCommand = listOfHotelCommand.Where(cmd => cmd.IsHandle(inputCommand)).Single();
+                ICommand hotelCommand = listOfHotelCommand.Where(cmd => cmd.IsHandle(inputCommand.GetCommandOnly())).Single();
                 object[] commandOptions = inputCommand.GetOptions();
                 string commandResult = hotelCommand.Execute(commandOptions);
                 triggerFunction(commandResult);

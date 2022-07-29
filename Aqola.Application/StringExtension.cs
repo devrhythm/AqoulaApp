@@ -38,5 +38,10 @@ namespace Aqola.Application
             }
             return (string)input ?? string.Empty;
         }
+
+        public static string GetCommandOnly(this string command)
+        {
+            return command.Split(' ')[0];
+        }
     }
 }

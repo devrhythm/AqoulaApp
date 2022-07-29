@@ -4,12 +4,14 @@ namespace Aqola.Application.Services.Commands
 {
     internal class ListGuestByAgeCommand : BaseHotelCommand, ICommand
     {
+        public override string CommandName => "list_guest_by_age";
+
         public ListGuestByAgeCommand(IHotelService hotelService) : base(hotelService)
         {
 
         }
 
-        public string Execute(params object?[] options)
+        public override string Execute(params object?[] options)
         {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             object filterAgeStart = options[0];
@@ -23,11 +25,6 @@ namespace Aqola.Application.Services.Commands
             string guestNames = _hotelService.GetGuestByAge(filterAgeStart, filterAgeEnd);
 #pragma warning restore CS8604 // Possible null reference argument.
             return guestNames;
-        }
-
-        public bool IsHandle(string command)
-        {
-            return command.StartsWith("list_guest_by_age");
         }
     }
 }

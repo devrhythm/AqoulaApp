@@ -8,7 +8,7 @@ Console.WriteLine(@"
 Welcome to Aqola Hotel App
 --------------------");
 IHotelService hotelService = new HotelService();
-HotellController controller = new(hotelService);
+HotelController controller = new(hotelService);
 int line = 1;
 Func<string, string> ShowResult = (result) =>
 {

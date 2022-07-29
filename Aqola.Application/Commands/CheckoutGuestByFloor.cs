@@ -4,11 +4,13 @@ namespace Aqola.Application.Services.Commands
 {
     internal class CheckoutGuestByFloor : BaseHotelCommand, ICommand
     {
+        public override string CommandName => "checkout";
+
         public CheckoutGuestByFloor(IHotelService hotelService) : base(hotelService)
         {
 
         }
-        public string Execute(params object[] options)
+        public override string Execute(params object[] options)
         {
             if (options is null)
             {
@@ -17,11 +19,6 @@ namespace Aqola.Application.Services.Commands
 
             int floorNo = options[0].ToInt();
             return _hotelService.CheckoutByFloor(floorNo);
-        }
-
-        public bool IsHandle(string command)
-        {
-            return command.StartsWith("checkout_guest_by_floor");
         }
     }
 }
