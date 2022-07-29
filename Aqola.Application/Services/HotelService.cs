@@ -83,5 +83,10 @@ namespace Aqola.Application.Services
                 .AsEnumerable();
             return string.Join(", ", listGuestNames);
         }
+
+        public List<Room> GetAvailableRooms()
+        {
+            return _currentHotel.GetAvailableRooms();
+        }
     }
 }

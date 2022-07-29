@@ -1,4 +1,5 @@
-﻿using Aqola.Domain.Services;
+﻿using Aqola.Domain.Models;
+using Aqola.Domain.Services;
 
 namespace Aqola.Application.Services.Commands
 {
@@ -11,7 +12,9 @@ namespace Aqola.Application.Services.Commands
 
         public string Execute(params object?[] options)
         {
-            throw new NotImplementedException();
+            List<Room> rooms = _hotelService.GetAvailableRooms();
+            string result = string.Join(", ", rooms.Select(r => r.RoomName).AsEnumerable());
+            return result;
         }
 
         public bool IsHandle(string command)
