@@ -11,7 +11,7 @@ namespace Aqola.Application.Services.Commands
 
         public string Execute(params object?[] options)
         {
-            throw new NotImplementedException();
+            return _hotelService.ListGuestNames();
         }
 
         public bool IsHandle(string command)
