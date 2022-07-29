@@ -3,9 +3,9 @@ using Aqola.Domain.Services;
 
 namespace Aqola.Application
 {
-    internal class CommandFactory
+    internal class HotelCommandFactory
     {
-        internal static List<ICommand>? Create(IHotelService hotelService)
+        internal static List<ICommand> Create(IHotelService hotelService)
         {
             return new List<ICommand>()
                         {

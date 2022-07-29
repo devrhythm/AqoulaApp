@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aqola.Application\Aqola.Application.csproj" />
     <ProjectReference Include="..\Aqola.Domain\Aqola.Domain.csproj" />
   </ItemGroup>
 
