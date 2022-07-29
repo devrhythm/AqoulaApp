@@ -23,14 +23,14 @@
             return Rooms;
         }
 
-        public bool IsEmptyGuest()
+        public bool IsAvailable()
         {
             return Rooms.TrueForAll(room => room.IsAvailable);
         }
 
-        public bool IsAvailable()
+        public bool IsUnavailable()
         {
-            return Rooms.TrueForAll(room => room.IsAvailable);
+            return Rooms.Any(room => !room.IsAvailable);
         }
 
         public List<Room> GetGuestRooms()

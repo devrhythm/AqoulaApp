@@ -105,7 +105,7 @@ namespace Aqola.Application.Services
         {
             Guest guest = new(guestName, guestAge);
             Floor floor = _currentHotel.GetFloor(floorNo);
-            if (floor.IsEmptyGuest())
+            if (floor.IsAvailable())
             {
                 foreach (Room bookedRoom in floor.Rooms)
                 {
