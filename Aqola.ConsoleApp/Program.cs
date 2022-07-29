@@ -9,9 +9,11 @@ Welcome to Aqola Hotel App
 --------------------");
 IHotelService hotelService = new HotelService();
 HotellController controller = new(hotelService);
+int line = 1;
 Func<string, string> ShowResult = (result) =>
 {
-    Console.WriteLine(result);
+    Console.WriteLine($"line {line:00}: {result}");
+    line++;
     return result;
 };
 try
